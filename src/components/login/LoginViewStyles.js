@@ -19,7 +19,7 @@ const LoginViewStyles = makeStyles((theme) => ({
   },
   paper: {
     width: 350,
-    padding: theme.spacing(1)
+    padding: theme.spacing(4)
   },
   form: {
     display: 'flex',
