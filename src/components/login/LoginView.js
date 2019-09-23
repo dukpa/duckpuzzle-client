@@ -1,28 +1,16 @@
 import React from 'react';
-import {makeStyles, useTheme} from '@material-ui/styles'
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import TextField from '@material-ui/core/TextField'
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Link from '@material-ui/core/Link';
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    flexGrow: 1
-  },
-  paper: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  textField: {
-    margin: theme.spacing(2)
-  },
-  button: {
-    margin: theme.spacing(2)
-  }
-}));
+import LoginViewStyles from './LoginViewStyles'
 
 export default function Login() {
-  const cls = useStyles();
+  const cls = LoginViewStyles();
   return (
     <Grid
       className={cls.container}
@@ -31,26 +19,44 @@ export default function Login() {
       justify="center" 
       alignItems="center"
     >
-      <Grid item xs={3}>
-        <Paper className={cls.paper}>
+      <Paper className={cls.paper}>
+        <form className={cls.form}>
           <TextField
-            className={cls.textField}
+            className={cls.input}
             label="Username"
             multiline
           />
           <TextField
-            className={cls.textField}
+            className={cls.input}
             label="Password"
           />
+          <FormControlLabel
+            className={cls.input}
+            label="Remember me"
+            control = {
+              <Checkbox
+              />
+            }
+          />
           <Button 
-            className={cls.button}
+            className={cls.input}
             variant="contained" 
             color="primary"
           >
             Login
           </Button>
-        </Paper>
-      </Grid>
+        </form>
+        <Grid
+          className={cls.linkBar}
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="center"
+        >
+          <Link href="javascript:;">Register</Link>
+          <Link href="javascript:;">Can't login?</Link>
+        </Grid>
+      </Paper>
     </Grid>
   );
 }

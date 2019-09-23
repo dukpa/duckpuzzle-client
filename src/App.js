@@ -2,8 +2,7 @@ import React from 'react';
 import { createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
-import Login from './components/login/LoginController'
-import './App.css';
+import Login from './components/login/LoginController';
 
 function App() {
   return (
