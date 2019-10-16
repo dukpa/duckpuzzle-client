@@ -9,7 +9,7 @@ import Link from '@material-ui/core/Link';
 
 import LoginViewStyles from './LoginViewStyles'
 
-export default function Login() {
+export default function Login(props) {
   const cls = LoginViewStyles();
   return (
     <Grid
@@ -20,22 +20,32 @@ export default function Login() {
       alignItems="center"
     >
       <Paper className={cls.paper}>
-        <form className={cls.form}>
+        <form className={cls.form} spellCheck="false">
           <TextField
+            name="userName"
             className={cls.input}
             label="Username"
-            multiline
+            value={props.userName}
+            required
+            onChange={props.onUserNameChange}
           />
           <TextField
+            name="password"
             className={cls.input}
+            type="password"
             label="Password"
+            value={props.password}
+            required
+            onChange={props.onPasswordChange}
           />
           <FormControlLabel
+            name="rememberMe"
             className={cls.input}
             label="Remember me"
+            checked={props.rememberMe}
+            onChange={props.onRememberMeChange}
             control = {
-              <Checkbox
-              />
+              <Checkbox/>
             }
           />
           <Button 

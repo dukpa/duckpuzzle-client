@@ -3,7 +3,6 @@ import {makeStyles} from '@material-ui/styles/';
 const LoginViewStyles = makeStyles((theme) => ({
   container: {
     flexGrow: 1,
-    zIndex: -1,
     backgroundColor: theme.palette.primary.main,
     '&:before': {
       content: '""',
