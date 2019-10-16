@@ -52,6 +52,7 @@ export default function Login(props) {
             className={cls.input}
             variant="contained" 
             color="primary"
+            onClick={props.onSubmit}
           >
             Login
           </Button>
