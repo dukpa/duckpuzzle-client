@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux';
 
 import Login from './LoginView';
-import {loginActions} from '../../redux/actions'
+import * as loginActions from '../../redux/actions/login.actions'
 
 class LoginController extends React.Component {
   constructor(props) {
@@ -30,6 +30,7 @@ class LoginController extends React.Component {
   handleSubmit(e) {
     const {userName, password, rememberMe} = this.state;
     this.props.login(userName, password);
+    e.preventDefault();
   }
 
   render() {

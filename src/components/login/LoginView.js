@@ -20,7 +20,11 @@ export default function Login(props) {
       alignItems="center"
     >
       <Paper className={cls.paper}>
-        <form className={cls.form} spellCheck="false">
+        <form 
+          className={cls.form}
+          spellCheck="false"
+          onSubmit={props.onSubmit}
+        >
           <TextField
             name="userName"
             className={cls.input}
@@ -50,6 +54,7 @@ export default function Login(props) {
           />
           <Button 
             className={cls.input}
+            type="submit"
             variant="contained" 
             color="primary"
             onClick={props.onSubmit}
