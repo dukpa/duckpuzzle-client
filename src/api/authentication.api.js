@@ -10,7 +10,7 @@ function _fakeLogin(userName, password) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (userName === "jimmy" && password === "test") {
-        resolve();
+        resolve({data: {userName}});
       } else {
         reject({
           name: authenticationErrors.BAD_USER_PASS

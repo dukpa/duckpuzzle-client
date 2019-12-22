@@ -3,7 +3,6 @@ import * as authentication from '../../api/authentication.api'
 export const types = {
   LOGIN_REQUEST: 'REQUEST_LOGIN',
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-  LOGIN_FAILURE: 'LOGIN_FAILURE',
   LOGIN_ERROR: 'LOGIN_ERROR'
 };
 
@@ -34,15 +33,9 @@ function loginSuccess(userName) {
   }
 }
 
-function loginFailure() {
-  return {
-    type: types.LOGIN_FAILURE
-  }
-}
-
 function loginError(err) {
   return {
-    type: types.LOGIN_FAILURE,
+    type: types.LOGIN_ERROR,
     payload: {
       error: err
     }

@@ -20,7 +20,7 @@ export default function authentication(state=initialState, action) {
         authenticated: true,
         errors: []
       };
-    case loginActions.types.LOGIN_SUCCESS:
+    case loginActions.types.LOGIN_ERROR:
       return {
         ...state,
         authenticated: false,
