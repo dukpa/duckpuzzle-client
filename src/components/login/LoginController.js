@@ -42,12 +42,37 @@ class LoginController extends React.Component {
       password={this.state.password}
       rememberMe={this.state.rememberMe}
       onSubmit={(e) => this.handleSubmit(e)}
+      formData={this.props.formData}
     />
   }
 }
 
 function mapState(state) {
-  return state;
+  let {authentication} = state;
+  let props = {
+    formData: {
+      userName: {
+        value: authentication.user,
+        hasError: false,
+        message: ''
+      },
+      password: {
+        value: authentication.password,
+        hasError: false,
+        message: ''
+      }
+    }
+  };
+  for (let error of authentication.errors) {
+    switch (error.name) {
+      case 'BAD_USER_PASS':
+        props.formData.userName.hasError = true;
+        props.formData.userName.error = 'The username or password you entered was not valid.'
+        props.formData.password.hasError = true
+        break;
+    }
+  }
+  return props;
 }
 
 const actionCreators = {

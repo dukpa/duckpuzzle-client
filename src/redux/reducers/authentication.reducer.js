@@ -26,7 +26,9 @@ export default function authentication(state=initialState, action) {
       return {
         ...state,
         authenticated: false,
-        errors: [action.error]
+        errors: [{
+          name: action.error.name
+        }]
       };
     default:
       return state;

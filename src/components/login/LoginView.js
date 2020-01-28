@@ -11,6 +11,7 @@ import LoginViewStyles from './LoginViewStyles'
 
 export default function Login(props) {
   const cls = LoginViewStyles();
+  console.log(props.formData);
   return (
     <Grid
       className={cls.container}
@@ -32,6 +33,8 @@ export default function Login(props) {
             value={props.userName}
             required
             onChange={props.onUserNameChange}
+            error={props.formData.userName.hasError}
+            helperText={props.formData.userName.hasError ? props.formData.userName.error : null}
           />
           <TextField
             name="password"
@@ -41,6 +44,7 @@ export default function Login(props) {
             value={props.password}
             required
             onChange={props.onPasswordChange}
+            error={props.formData.password.hasError}
           />
           <FormControlLabel
             name="rememberMe"
