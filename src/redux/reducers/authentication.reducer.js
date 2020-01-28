@@ -3,7 +3,8 @@ import * as loginActions from '../actions/login.actions';
 const initialState = {
   user: null,
   authenticated: false,
-  errors: []
+  errors: [],
+  token: null
 }
 
 export default function authentication(state=initialState, action) {
@@ -16,7 +17,8 @@ export default function authentication(state=initialState, action) {
     case loginActions.types.LOGIN_SUCCESS:
       return {
         ...state, 
-        user: action.payload.userName,
+        user: action.email,
+        token: action.token,
         authenticated: true,
         errors: []
       };
@@ -24,7 +26,7 @@ export default function authentication(state=initialState, action) {
       return {
         ...state,
         authenticated: false,
-        errors: [action.payload.error]
+        errors: [action.error]
       };
     default:
       return state;

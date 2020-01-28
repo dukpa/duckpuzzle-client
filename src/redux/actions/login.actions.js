@@ -10,8 +10,12 @@ export function login(userName, password) {
   return async function(dispatch) {
     dispatch(loginRequest());
     try {
-      await authentication.login(userName, password);
-      dispatch(loginSuccess(userName))
+      let loginResp = await authentication.login(userName, password);
+      if (loginResp.success) {
+        dispatch(loginSuccess(loginResp.data));
+      } else {
+        throw loginResp.error;
+      }
     } catch(e) {
       dispatch(loginError(e))
     }
@@ -24,20 +28,17 @@ function loginRequest() {
   }
 }
 
-function loginSuccess(userName) {
+function loginSuccess(data) {
   return {
     type: types.LOGIN_SUCCESS,
-    payload: {
-      userName: userName
-    }
+    email: data.email,
+    token: data.token
   }
 }
 
 function loginError(err) {
   return {
     type: types.LOGIN_ERROR,
-    payload: {
-      error: err
-    }
+    error: err
   }
 }
