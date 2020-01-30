@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux'
-import authentication from './authentication.reducer'
+import authentication from './authentication'
+import loginForm from './loginform'
 
 const reducer = combineReducers({
-  authentication
+  authentication,
+  loginForm
 });
 
 export default reducer;

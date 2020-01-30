@@ -1,4 +1,4 @@
-import * as loginActions from '../actions/login.actions';
+import * as loginActions from '../actions/login';
 
 const initialState = {
   user: null,
