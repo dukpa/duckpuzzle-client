@@ -11,7 +11,7 @@ import LoginViewStyles from './LoginViewStyles'
 
 export default function Login(props) {
   const cls = LoginViewStyles();
-  
+
   return (
     <Grid
       className={cls.container}
@@ -63,6 +63,7 @@ export default function Login(props) {
             variant="contained" 
             color="primary"
             onClick={props.onSubmit}
+            disabled={!props.formData.canSubmit}
           >
             Login
           </Button>

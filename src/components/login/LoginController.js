@@ -12,16 +12,16 @@ function mapState(state) {
     formData: {
       userName: {
         value: loginForm.userName.value,
-        hasError: !loginForm.userName.isValid,
+        hasError: loginForm.userName.isValid === false,
         message: ''
       },
       password: {
         value: loginForm.password.value,
-        hasError: !loginForm.password.isValid,
+        hasError: loginForm.password.isValid === false,
         message: ''
-      }
-    },
-    canSubmit: loginForm.isValid
+      },
+      canSubmit: loginForm.isValid
+    }
   };
 
   if (loginForm.userName.isEmpty) {
