@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import Login from './LoginView';
 import * as loginActions from '../../redux/actions/login'
 import * as loginFormActions from '../../redux/actions/loginform'
+import loginForm from '../../redux/reducers/loginform';
 
 function mapState(state) {
   let {authentication, loginForm} = state;
@@ -39,22 +40,17 @@ const actionCreators = {
   updatePassword: loginFormActions.updatePassword
 };
 
-class LoginController extends React.Component {
-  render() {
-    return <Login
-      onUserNameChange={(e) => this.props.updateUserName(e.target.value)}
-      onPasswordChange={(e) => this.props.updatePassword(e.target.value)}
-      onRememberMeChange={(e) => this.handleChange(e)}
-      userName={this.props.formData.userName.value}
-      password={this.props.formData.password.value}
-      rememberMe={this.props.rememberMe}
-      onSubmit={(e) => {
-        this.props.login(this.props.formData.userName.value, this.props.formData.password.value);
-        e.preventDefault();
-      }}
-      formData={this.props.formData}
-    />
-  }
+function LoginController(props) {
+  return <Login
+    formData={props.formData}
+    onUserNameChange={(e) => props.updateUserName(e.target.value)}
+    onPasswordChange={(e) => props.updatePassword(e.target.value)}
+    onRememberMeChange={(e) => this.handleChange(e)}
+    onSubmit={(e) => {
+      props.login(props.formData.userName.value, props.formData.password.value);
+      e.preventDefault();
+    }}
+  />
 }
 
 export default connect(mapState, actionCreators)(LoginController);

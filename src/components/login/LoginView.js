@@ -30,7 +30,7 @@ export default function Login(props) {
             name="userName"
             className={cls.input}
             label="Username"
-            value={props.userName}
+            value={props.formData.userName.value}
             required
             onChange={props.onUserNameChange}
             error={props.formData.userName.hasError}
@@ -41,7 +41,7 @@ export default function Login(props) {
             className={cls.input}
             type="password"
             label="Password"
-            value={props.password}
+            value={props.formData.password.value}
             required
             onChange={props.onPasswordChange}
             error={props.formData.password.hasError}
