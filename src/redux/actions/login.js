@@ -9,7 +9,9 @@ export const types = {
 
 export function login(userName, password) {
   return async function(dispatch, getState) {
-    dispatch(validateLogin(userName, password));
+    if (!getState().loginForm.isValid) {
+      return;
+    }
     dispatch(loginRequest());
     try {
       let loginResp = await authentication.login(userName, password);
@@ -42,13 +44,5 @@ function loginError(err) {
   return {
     type: types.LOGIN_ERROR,
     error: err
-  }
-}
-
-function validateLogin(userName, password) {
-  return {
-    type: types.LOGIN_VALIDATE,
-    userName,
-    password
   }
 }
