@@ -75,8 +75,8 @@ export default function Login(props) {
           justify="space-between"
           alignItems="center"
         >
-          <Link href="javascript:;">Register</Link>
-          <Link href="javascript:;">Can't login?</Link>
+          <Link href="">Register</Link>
+          <Link href="">Can't login?</Link>
         </Grid>
       </Paper>
     </Grid>
