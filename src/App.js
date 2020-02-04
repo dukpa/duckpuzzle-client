@@ -1,17 +1,18 @@
 import React from 'react';
-import { createMuiTheme } from "@material-ui/core/styles";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { ThemeProvider } from '@material-ui/styles';
+import {Switch, Route, Redirect} from 'react-router-dom';
+
 import Login from './components/login/LoginController';
 
 function App() {
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <ThemeProvider theme={createMuiTheme()}>
+    <Switch>
+      <Route path="/login">
         <Login></Login>
-      </ThemeProvider>
-    </React.Fragment>
+      </Route>
+      <Route path="/">
+        <Redirect to="/login"></Redirect>
+      </Route>
+    </Switch>
   );
 }
 
