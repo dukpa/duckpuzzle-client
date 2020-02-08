@@ -1,4 +1,4 @@
-import * as authentication from '../../api/authentication.api'
+import * as authentication from './authentication.api'
 
 export const types = {
   LOGIN_REQUEST: 'REQUEST_LOGIN',

@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Link from '@material-ui/core/Link';
 
-import LoginViewStyles from './LoginViewStyles'
+import LoginViewStyles from './LoginStyles'
 
 export default function Login(props) {
   const cls = LoginViewStyles();

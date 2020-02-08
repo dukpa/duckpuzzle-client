@@ -1,4 +1,4 @@
-import * as loginFormActions from '../actions/loginform'
+import * as loginFormActions from './LoginActions'
 
 function loginForm(state={
   isValid: false,

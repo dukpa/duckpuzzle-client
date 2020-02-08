@@ -2,8 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux';
 
 import Login from './LoginView';
-import * as loginActions from '../../redux/actions/login'
-import * as loginFormActions from '../../redux/actions/loginform'
+import * as loginActions from '../../services/authentication/authentication.actions'
+import * as loginFormActions from './LoginActions'
 
 function mapState(state) {
   let {authentication, loginForm} = state;

@@ -1,4 +1,4 @@
-import utils from './utils'
+import utils from '../../utils'
 
 export const authenticationErrors = {
   BAD_USER_PASS: 'BAD_USER_PASS'
