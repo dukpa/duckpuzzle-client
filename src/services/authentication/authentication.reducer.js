@@ -1,36 +1,57 @@
-import * as loginActions from './authentication.actions';
+import {createReducer} from '@reduxjs/toolkit';
+import {createAction} from '@reduxjs/toolkit';
+import * as authentication from './authentication.api';
 
-const initialState = {
+const loginRequest = createAction('REQUEST_LOGIN');
+
+const loginSuccess = createAction('LOGIN_SUCCESS', (data) => ({
+  payload: {
+    email: data.email,
+    token: data.token
+  }
+}));
+
+const loginError = createAction('LOGIN_ERROR', (err) => ({
+  payload: {
+    error: err
+  }
+}));
+
+export const login = (userName, password) => async (dispatch, getState) => {
+  if (!getState().loginForm.isValid) {
+    return;
+  }
+  dispatch(loginRequest());
+  try {
+    let loginResp = await authentication.login(userName, password);
+    if (loginResp.success) {
+      dispatch(loginSuccess(loginResp.data));
+    } else {
+      throw loginResp.error;
+    }
+  } catch(e) {
+    dispatch(loginError(e))
+  }
+}
+
+export default createReducer({
   user: null,
   authenticated: false,
   errors: [],
   token: null
-}
-
-export default function authentication(state=initialState, action) {
-  switch(action.type) {
-    case loginActions.types.LOGIN_REQUEST:
-      return {
-        ...state, 
-        authenticated: false
-      };
-    case loginActions.types.LOGIN_SUCCESS:
-      return {
-        ...state, 
-        user: action.email,
-        token: action.token,
-        authenticated: true,
-        errors: []
-      };
-    case loginActions.types.LOGIN_ERROR:
-      return {
-        ...state,
-        authenticated: false,
-        errors: [{
-          name: action.error.name
-        }]
-      };
-    default:
-      return state;
+}, {
+  [loginRequest]: function(state, action) {
+    state.authenticated = false;
+  },
+  [loginSuccess]: function(state, action) {
+    state.user = action.payload.email;
+    state.token = action.payload.token;
+    state.authenticated = true;
+    state.errors = [];
+  },
+  [loginError]: function(state, action) {
+    state.errors = [{
+      name: action.payload.error.name
+    }];
   }
-}
+});

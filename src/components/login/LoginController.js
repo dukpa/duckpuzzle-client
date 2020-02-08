@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux';
 
 import Login from './LoginView';
-import * as loginActions from '../../services/authentication/authentication.actions'
+import {login} from '../../services/authentication/authentication.reducer'
 import * as loginFormActions from './LoginActions'
 
 function mapState(state) {
@@ -34,7 +34,7 @@ function mapState(state) {
 }
 
 const actionCreators = {
-  login: loginActions.login,
+  login: login,
   updateUserName: loginFormActions.updateUserName,
   updatePassword: loginFormActions.updatePassword
 };
