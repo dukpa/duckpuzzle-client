@@ -6,7 +6,7 @@ import {updateUserName, updatePassword} from './login.reducer';
 import {login} from '../../services/authentication/authentication.reducer';
 
 function mapState(state) {
-  let {authentication, loginForm} = state;
+  let {loginForm} = state;
   let props = {
     formData: loginForm
   };
