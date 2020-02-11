@@ -14,10 +14,10 @@ function mapState(state) {
   return props;
 }
 
-const actionCreators = {
+const mapDispatch = {
   login: login,
   onUserNameChange: updateUserName,
   onPasswordChange: updatePassword
 };
 
-export default connect(mapState, actionCreators)(Login);
+export default connect(mapState, mapDispatch)(Login);
