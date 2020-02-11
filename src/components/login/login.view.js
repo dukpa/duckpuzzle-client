@@ -7,10 +7,10 @@ import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Link from '@material-ui/core/Link';
 
-import LoginViewStyles from './LoginStyles'
+import useStyle from './login.style'
 
 export default function Login(props) {
-  const cls = LoginViewStyles();
+  const cls = useStyle();
 
   const handleSubmit = (e) => {
     debugger;

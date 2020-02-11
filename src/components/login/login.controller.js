@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux';
 
-import Login from './LoginView';
-import {updateUserName, updatePassword} from './LoginReducer';
+import Login from './login.view';
+import {updateUserName, updatePassword} from './login.reducer';
 import {login} from '../../services/authentication/authentication.reducer';
 
 function mapState(state) {

@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/styles/';
 
-const LoginViewStyles = makeStyles((theme) => ({
+export default makeStyles((theme) => ({
   container: {
     flexGrow: 1,
     backgroundColor: theme.palette.primary.main,
@@ -33,5 +33,3 @@ const LoginViewStyles = makeStyles((theme) => ({
     padding: theme.spacing(1)
   }
 }));
-
-export default LoginViewStyles;
