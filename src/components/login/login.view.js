@@ -13,7 +13,6 @@ export default function Login(props) {
   const cls = useStyle();
 
   const handleSubmit = (e) => {
-    debugger;
     props.login(props.formData.userName.value, props.formData.password.value);
     e.preventDefault();
   };
