@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 
-import Login from './components/login/login.controller';
+import Login from './components/login/login.container';
 
 function App() {
   return (
