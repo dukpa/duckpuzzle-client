@@ -12,6 +12,12 @@ import LoginViewStyles from './LoginStyles'
 export default function Login(props) {
   const cls = LoginViewStyles();
 
+  const handleSubmit = (e) => {
+    debugger;
+    props.login(props.formData.userName.value, props.formData.password.value);
+    e.preventDefault();
+  };
+
   return (
     <Grid
       className={cls.container}
@@ -24,7 +30,7 @@ export default function Login(props) {
         <form 
           className={cls.form}
           spellCheck="false"
-          onSubmit={props.onSubmit}
+          onSubmit={handleSubmit}
         >
           <TextField
             name="userName"
@@ -32,9 +38,9 @@ export default function Login(props) {
             label="Username"
             value={props.formData.userName.value}
             required
-            onChange={props.onUserNameChange}
-            error={props.formData.userName.hasError}
-            helperText={props.formData.userName.hasError ? props.formData.userName.message : null}
+            onChange={(e) => props.onUserNameChange(e.target.value)}
+            error={!!props.formData.userName.error}
+            helperText={props.formData.userName.error}
           />
           <TextField
             name="password"
@@ -43,9 +49,9 @@ export default function Login(props) {
             label="Password"
             value={props.formData.password.value}
             required
-            onChange={props.onPasswordChange}
-            error={props.formData.password.hasError}
-            helperText={props.formData.password.hasError ? props.formData.password.message : null}
+            onChange={(e) => props.onPasswordChange(e.target.value)}
+            error={!!props.formData.password.error}
+            helperText={props.formData.password.error}
           />
           <FormControlLabel
             name="rememberMe"
@@ -62,7 +68,7 @@ export default function Login(props) {
             type="submit"
             variant="contained" 
             color="primary"
-            onClick={props.onSubmit}
+            onClick={handleSubmit}
             disabled={!props.formData.canSubmit}
           >
             Login

@@ -18,9 +18,6 @@ const loginError = createAction('LOGIN_ERROR', (err) => ({
 }));
 
 export const login = (userName, password) => async (dispatch, getState) => {
-  if (!getState().loginForm.isValid) {
-    return;
-  }
   dispatch(loginRequest());
   try {
     let loginResp = await authentication.login(userName, password);

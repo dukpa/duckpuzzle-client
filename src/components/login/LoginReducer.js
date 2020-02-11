@@ -1,44 +1,65 @@
-import * as loginFormActions from './LoginActions'
+import {createAction, createReducer} from '@reduxjs/toolkit';
 
-function loginForm(state={
-  isValid: false,
+export const updateUserName = createAction('LOGIN_FORM_UPDATE_USERNAME', (value) => ({
+  payload: {value}
+}));
+
+export const updatePassword = createAction('LOGIN_FORM_UPDATE_PASSWORD', (value) => ({
+  payload: {value}
+}));
+
+const validateUserName = (value = '') => {
+  if (value.length === 0) {
+    return 'Username is required';
+  }
+  return '';
+}
+
+const validatePassword = (value = '') => {
+  if (value.length === 0) {
+    return 'Password is required';
+  }
+  return '';
+}
+
+const canSubmit = (state) => {
+  for (let key in state) {
+    let field = state[key];
+    if (typeof field !== 'object') {
+      continue;
+    }
+    if (field.error || !field.touched) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export default createReducer({
+  canSubmit: false,
   userName: {
     value: '',
-    isValid: null,
-    isEmpty: null
+    error: '',
+    touched: false
   },
   password: {
     value: '',
-    isValid: null,
-    isEmpty: null
+    error: '',
+    touched: false
   }
-}, action) {
-  switch (action.type) {
-    case loginFormActions.types.UPDATE_USERNAME:
-      const emptyUserName = !action.value;
-      return {
-        ...state,
-        userName: {
-          value: action.value,
-          isEmpty: emptyUserName,
-          isValid: !emptyUserName
-        },
-        isValid: !emptyUserName && state.password.isValid
-      }
-    case loginFormActions.types.UPDATE_PASSWORD:
-      const emptyPassword = !action.value;
-      return {
-        ...state,
-        password: {
-          value: action.value,
-          isEmpty: emptyPassword,
-          isValid: !emptyPassword
-        },
-        isValid: !emptyPassword && state.userName.isValid
-      }
-    default:
-      return state;
+}, {
+  [updateUserName]: function(state, action) {
+    const {value} = action.payload;
+    state.userName.value = value;
+    state.userName.error = validateUserName(value);
+    state.userName.touched = true;
+    state.canSubmit = canSubmit(state);
+  },
+  [updatePassword]: function(state, action) {
+    const {value} = action.payload;
+    state.password.value = value;
+    state.password.error = validatePassword(value);
+    state.password.touched = true;
+    state.canSubmit = canSubmit(state);
   }
-}
-
-export default loginForm;
+});

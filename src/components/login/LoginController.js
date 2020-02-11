@@ -2,54 +2,22 @@ import React from 'react'
 import {connect} from 'react-redux';
 
 import Login from './LoginView';
-import {login} from '../../services/authentication/authentication.reducer'
-import * as loginFormActions from './LoginActions'
+import {updateUserName, updatePassword} from './LoginReducer';
+import {login} from '../../services/authentication/authentication.reducer';
 
 function mapState(state) {
   let {authentication, loginForm} = state;
   let props = {
-    formData: {
-      userName: {
-        value: loginForm.userName.value,
-        hasError: loginForm.userName.isValid === false,
-        message: ''
-      },
-      password: {
-        value: loginForm.password.value,
-        hasError: loginForm.password.isValid === false,
-        message: ''
-      },
-      canSubmit: loginForm.isValid
-    }
+    formData: loginForm
   };
-
-  if (loginForm.userName.isEmpty) {
-    props.formData.userName.message = 'Username is required';
-  }
-  if (loginForm.password.isEmpty){
-    props.formData.password.message = 'Password is required';
-  }
 
   return props;
 }
 
 const actionCreators = {
   login: login,
-  updateUserName: loginFormActions.updateUserName,
-  updatePassword: loginFormActions.updatePassword
+  onUserNameChange: updateUserName,
+  onPasswordChange: updatePassword
 };
 
-function LoginController(props) {
-  return <Login
-    formData={props.formData}
-    onUserNameChange={(e) => props.updateUserName(e.target.value)}
-    onPasswordChange={(e) => props.updatePassword(e.target.value)}
-    onRememberMeChange={(e) => this.handleChange(e)}
-    onSubmit={(e) => {
-      props.login(props.formData.userName.value, props.formData.password.value);
-      e.preventDefault();
-    }}
-  />
-}
-
-export default connect(mapState, actionCreators)(LoginController);
+export default connect(mapState, actionCreators)(Login);
