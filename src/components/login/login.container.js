@@ -1,23 +1,67 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux';
 
 import Login from './login.view';
-import {updateUserName, updatePassword} from './login.reducer';
 import {login} from '../../services/authentication/authentication.reducer';
 
-function mapState(state) {
-  let {loginForm} = state;
-  let props = {
-    formData: loginForm
+export default connect(undefined, {login})(function(props) {
+  let [userName, setUserName] = useState({
+    value: '',
+    touched: false,
+    error: ''
+  });
+  const validateUserName = (value) => {
+    if (value.length === 0) {
+      return 'Username is required';
+    }
+  };
+  const updateUserName = (e) => {
+    setUserName({
+      value: e.target.value,
+      touched: true,
+      error: validateUserName(e.target.value)
+    });
   };
 
-  return props;
-}
+  let [password, setPassword] = useState({
+    value: '',
+    touched: false,
+    error: ''
+  });
+  const validatePassword = (value) => {
+    if (value.length === 0) {
+      return 'Password is required';
+    }
+  };
+  const updatePassword = (e) => {
+    setPassword({
+      value: e.target.value,
+      touched: true,
+      error: validatePassword(e.target.value)
+    });
+  };
 
-const mapDispatch = {
-  login: login,
-  onUserNameChange: updateUserName,
-  onPasswordChange: updatePassword
-};
+  const canSubmit = () => {
+    return userName.touched && !userName.error && password.touched && !password.error;
+  };
 
-export default connect(mapState, mapDispatch)(Login);
+  const formData = {
+    canSubmit: canSubmit(),
+    userName,
+    password
+  }
+
+  const handleSubmit = (e) => {
+    props.login(userName.value, password.value);
+    e.preventDefault();
+  };
+
+  return (
+    <Login
+      formData={formData}
+      onUserNameChange={updateUserName}
+      onPasswordChange={updatePassword}
+      onSubmit={handleSubmit}
+    ></Login>
+  )
+});

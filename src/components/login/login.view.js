@@ -12,11 +12,6 @@ import useStyle from './login.style'
 export default function Login(props) {
   const cls = useStyle();
 
-  const handleSubmit = (e) => {
-    props.login(props.formData.userName.value, props.formData.password.value);
-    e.preventDefault();
-  };
-
   return (
     <Grid
       className={cls.container}
@@ -29,7 +24,7 @@ export default function Login(props) {
         <form 
           className={cls.form}
           spellCheck="false"
-          onSubmit={handleSubmit}
+          onSubmit={props.onSubmit}
         >
           <TextField
             name="userName"
@@ -37,7 +32,7 @@ export default function Login(props) {
             label="Username"
             value={props.formData.userName.value}
             required
-            onChange={(e) => props.onUserNameChange(e.target.value)}
+            onChange={props.onUserNameChange}
             error={!!props.formData.userName.error}
             helperText={props.formData.userName.error}
           />
@@ -48,7 +43,7 @@ export default function Login(props) {
             label="Password"
             value={props.formData.password.value}
             required
-            onChange={(e) => props.onPasswordChange(e.target.value)}
+            onChange={props.onPasswordChange}
             error={!!props.formData.password.error}
             helperText={props.formData.password.error}
           />
@@ -67,7 +62,7 @@ export default function Login(props) {
             type="submit"
             variant="contained" 
             color="primary"
-            onClick={handleSubmit}
+            onClick={props.onSubmit}
             disabled={!props.formData.canSubmit}
           >
             Login
