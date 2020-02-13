@@ -2,9 +2,22 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux';
 
 import Login from './login.view';
-import {login} from '../../services/authentication/authentication.reducer';
+import {login, clearError} from '../../services/authentication/authentication.reducer';
+import LoginAlerts from './login.alerts';
+import getResource from './login.resources'
 
-export default connect(undefined, {login})(function(props) {
+export default connect(
+  function(state) {
+    const error = state.authentication.error
+    return {
+      snack: {
+        open: !!error,
+        message: getResource(error)
+      }
+    }
+  },
+  {login, clearError}
+)(function(props) {
   let [userName, setUserName] = useState({
     value: '',
     touched: false,
@@ -57,11 +70,18 @@ export default connect(undefined, {login})(function(props) {
   };
 
   return (
-    <Login
-      formData={formData}
-      onUserNameChange={updateUserName}
-      onPasswordChange={updatePassword}
-      onSubmit={handleSubmit}
-    ></Login>
+    <React.Fragment>
+      <LoginAlerts
+        open={props.snack.open}
+        message={props.snack.message}
+        handleClose={props.clearError}
+      ></LoginAlerts>
+      <Login
+        formData={formData}
+        onUserNameChange={updateUserName}
+        onPasswordChange={updatePassword}
+        onSubmit={handleSubmit}
+      ></Login>
+    </React.Fragment>
   )
 });

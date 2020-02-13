@@ -2,6 +2,9 @@ import {createReducer} from '@reduxjs/toolkit';
 import {createAction} from '@reduxjs/toolkit';
 import * as authentication from './authentication.api';
 
+export const BAD_USER_PASS = authentication.BAD_USER_PASS;
+export const UNKNOWN_ERROR = 'UNKNOWN_ERROR';
+
 const loginRequest = createAction('REQUEST_LOGIN');
 
 const loginSuccess = createAction('LOGIN_SUCCESS', (data) => ({
@@ -17,6 +20,8 @@ const loginError = createAction('LOGIN_ERROR', (err) => ({
   }
 }));
 
+export const clearError = createAction('CLEAR_ERROR');
+
 export const login = (userName, password) => async (dispatch, getState) => {
   dispatch(loginRequest());
   try {
@@ -27,14 +32,14 @@ export const login = (userName, password) => async (dispatch, getState) => {
       throw loginResp.error;
     }
   } catch(e) {
-    dispatch(loginError(e))
+    dispatch(loginError(e));
   }
 }
 
 export default createReducer({
   user: null,
   authenticated: false,
-  errors: [],
+  error: null,
   token: null
 }, {
   [loginRequest]: function(state, action) {
@@ -44,11 +49,17 @@ export default createReducer({
     state.user = action.payload.email;
     state.token = action.payload.token;
     state.authenticated = true;
-    state.errors = [];
+    state.error = null;
   },
   [loginError]: function(state, action) {
-    state.errors = [{
-      name: action.payload.error.name
-    }];
+    const {error} = action.payload;
+    if (error.name === BAD_USER_PASS) {
+      state.error = BAD_USER_PASS;
+    } else {
+      state.error = UNKNOWN_ERROR
+    }
+  },
+  [clearError]: function(state) {
+    state.error = null;
   }
 });

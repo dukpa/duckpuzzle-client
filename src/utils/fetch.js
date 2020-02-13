@@ -25,7 +25,9 @@ export default async function(url, args) {
     }
   } catch(e) {
     ret.success = false;
-    ret.error = e;
+    ret.error = {
+      name: 'UNKNOWN_ERROR'
+    };
   }
   return ret;
 }
