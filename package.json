@@ -6,6 +6,7 @@
     "@material-ui/core": "^4.9.2",
     "@material-ui/lab": "^4.0.0-alpha.42",
     "@reduxjs/toolkit": "^1.2.3",
+    "office-ui-fabric-react": "^7.93.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",

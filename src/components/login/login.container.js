@@ -70,18 +70,12 @@ export default connect(
   };
 
   return (
-    <React.Fragment>
-      <LoginAlerts
-        open={props.snack.open}
-        message={props.snack.message}
-        handleClose={props.clearError}
-      ></LoginAlerts>
-      <Login
-        formData={formData}
-        onUserNameChange={updateUserName}
-        onPasswordChange={updatePassword}
-        onSubmit={handleSubmit}
-      ></Login>
-    </React.Fragment>
+    <Login
+      formData={formData}
+      onUserNameChange={updateUserName}
+      onPasswordChange={updatePassword}
+      onSubmit={handleSubmit}
+      errorMessage={props.snack.message}
+    ></Login>
   )
 });
