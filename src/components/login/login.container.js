@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 
 import Login from './login.view';
 import {login, clearError} from '../../services/authentication/authentication.reducer';
-import LoginAlerts from './login.alerts';
 import getResource from './login.resources'
 
 export default connect(
