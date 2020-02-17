@@ -1,7 +1,8 @@
 import React from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
 import Login from './components/login/login.container';
+import Dashboard from './components/main/main.container'
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
         <Login></Login>
       </Route>
       <Route path="/">
-        <Redirect to="/login"></Redirect>
+        <Dashboard></Dashboard>
       </Route>
     </Switch>
   );
