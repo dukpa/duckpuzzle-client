@@ -7,9 +7,6 @@ import { Stack } from 'office-ui-fabric-react/lib/Stack';
 import { DefaultPalette } from 'office-ui-fabric-react/lib/Styling';
 import {MessageBar, MessageBarType} from 'office-ui-fabric-react';
 
-
-import useStyle from './login.style';
-
 export default function Login(props) {
   return (
     <Stack
