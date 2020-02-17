@@ -29,7 +29,10 @@ export default function Login(props) {
         }}
         tokens={{childrenGap: 10}}
       >
-        {props.errorMessage && (<MessageBar messageBarType={MessageBarType.error}>{props.errorMessage}</MessageBar>)}
+        {props.errorMessage &&(
+          <MessageBar messageBarType={MessageBarType.error} onDismiss={props.dismissError}>
+            {props.errorMessage}
+          </MessageBar>)}
         <form 
           spellCheck="false"
           onSubmit={props.onSubmit}

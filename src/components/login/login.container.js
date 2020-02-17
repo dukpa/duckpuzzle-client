@@ -75,6 +75,7 @@ export default connect(
       onPasswordChange={updatePassword}
       onSubmit={handleSubmit}
       errorMessage={props.snack.message}
+      dismissError={props.clearError}
     ></Login>
   )
 });
