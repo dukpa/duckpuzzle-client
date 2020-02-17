@@ -1,3 +1,7 @@
+import {getToken} from '../services/authentication/authentication.api';
+
+export const UNAUTHORIZED = 'UNAUTHORIZED';
+
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 export default async function(url, args) {
@@ -8,11 +12,19 @@ export default async function(url, args) {
     error: null
   };
 
+  let token = getToken();
+  if (!token) {
+    ret.success = false;
+    ret.error = UNAUTHORIZED;
+    return ret;
+  }
+
   try {
     let resp = await fetch(url, {
       ...args,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-access-token': token
       }
     });
     let json = await resp.json();
