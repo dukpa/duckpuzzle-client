@@ -39,7 +39,6 @@ export const login = (userName, password) => async (dispatch, getState) => {
 }
 
 export default createReducer({
-  user: null,
   authenticated: false,
   error: null,
   token: null
@@ -48,7 +47,6 @@ export default createReducer({
     state.authenticated = false;
   },
   [loginSuccess]: function(state, action) {
-    state.user = action.payload.email;
     state.token = action.payload.token;
     state.authenticated = true;
     state.error = null;
@@ -65,7 +63,6 @@ export default createReducer({
     state.error = null;
   },
   [invalidateAuthentication]: function(state, action) {
-    state.user = null;
     state.authenticated = false;
     state.token = null;
   }

@@ -1,22 +1,30 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import Login from './login.view';
 import {login, clearError} from '../../services/authentication/authentication.reducer';
 import getResource from './login.resources'
 
-export default connect(
-  function(state) {
-    const error = state.authentication.error
-    return {
-      snack: {
-        open: !!error,
-        message: getResource(error)
-      }
+const mapState = (state) => {
+  const error = state.authentication.error
+  return {
+    loggedIn: state.authentication.authenticated,
+    snack: {
+      open: !!error,
+      message: getResource(error)
     }
-  },
-  {login, clearError}
-)(function(props) {
+  }
+};
+
+const mapDispatch = {
+  login,
+  clearError
+};
+
+export default connect(mapState, {login, clearError})(function(props) {
+  let {snack, clearError, login, loggedIn} = props;
+
   let [userName, setUserName] = useState({
     value: '',
     touched: false,
@@ -64,18 +72,21 @@ export default connect(
   }
 
   const handleSubmit = (e) => {
-    props.login(userName.value, password.value);
+    login(userName.value, password.value);
     e.preventDefault();
   };
 
   return (
-    <Login
-      formData={formData}
-      onUserNameChange={updateUserName}
-      onPasswordChange={updatePassword}
-      onSubmit={handleSubmit}
-      errorMessage={props.snack.message}
-      dismissError={props.clearError}
-    ></Login>
+    <React.Fragment>
+      {loggedIn && (<Redirect to="/"></Redirect>)}
+      <Login
+        formData={formData}
+        onUserNameChange={updateUserName}
+        onPasswordChange={updatePassword}
+        onSubmit={handleSubmit}
+        errorMessage={snack.message}
+        dismissError={clearError}
+      ></Login>
+    </React.Fragment>
   )
 });

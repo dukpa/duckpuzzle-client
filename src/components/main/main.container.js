@@ -24,7 +24,7 @@ export default connect(mapState, mapDispatch)(
     }, []);
     return (
       <React.Fragment>
-        {user.name || (<Redirect to="/login" />)}
+        {!!user.name || user.loading || (<Redirect to="/login" />)}
         <Dashboard user={props.user}></Dashboard>
       </React.Fragment>
     );
