@@ -22,6 +22,8 @@ const loginError = createAction('LOGIN_ERROR', (err) => ({
 
 export const clearError = createAction('CLEAR_ERROR');
 
+export const invalidateAuthentication = createAction('INVALIDATE_AUTHENTICATION');
+
 export const login = (userName, password) => async (dispatch, getState) => {
   dispatch(loginRequest());
   try {
@@ -61,5 +63,10 @@ export default createReducer({
   },
   [clearError]: function(state) {
     state.error = null;
+  },
+  [invalidateAuthentication]: function(state, action) {
+    state.user = null;
+    state.authenticated = false;
+    state.token = null;
   }
 });

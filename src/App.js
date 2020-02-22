@@ -2,7 +2,7 @@ import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 
 import Login from './components/login/login.container';
-import Dashboard from './components/main/main.container'
+import Main from './components/main/main.container'
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <Login></Login>
       </Route>
       <Route path="/">
-        <Dashboard></Dashboard>
+        <Main></Main>
       </Route>
     </Switch>
   );

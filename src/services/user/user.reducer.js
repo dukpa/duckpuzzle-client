@@ -2,13 +2,15 @@ import {createReducer} from '@reduxjs/toolkit';
 import {createAction} from '@reduxjs/toolkit';
 
 import {getUserInfo} from './user.api';
+import { UNAUTHORIZED } from '../../utils/fetch';
+import { invalidateAuthentication } from '../authentication/authentication.reducer';
 
 const requestUserInfo = createAction('REQUEST_USER_INFO');
 const receiveUserInfo = createAction('RECEIVE_USER_INFO', (data) => {
   return {payload: data};
 });
 const errorUserInfo = createAction('ERROR_USER_INFO', (e) => {
-  return {error: e};
+  return {payload: {error: e}};
 });
 
 export const loadUserInfo = () => async (dispatch) => {
@@ -22,6 +24,9 @@ export const loadUserInfo = () => async (dispatch) => {
     }
   } catch(e) {
     dispatch(errorUserInfo(e));
+    if (e.name === UNAUTHORIZED) {
+      dispatch(invalidateAuthentication());
+    }
   }
 }
 

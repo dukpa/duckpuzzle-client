@@ -15,7 +15,9 @@ export default async function(url, args) {
   let token = getToken();
   if (!token) {
     ret.success = false;
-    ret.error = UNAUTHORIZED;
+    ret.error = {
+      name: UNAUTHORIZED
+    };
     return ret;
   }
 
