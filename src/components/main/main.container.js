@@ -25,7 +25,7 @@ export default connect(mapState, mapDispatch)(
 
     return (
       <React.Fragment>
-        <Dashboard user={props.user}></Dashboard>
+        <Dashboard user={user}></Dashboard>
       </React.Fragment>
     );
   }
