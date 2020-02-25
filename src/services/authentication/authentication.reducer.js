@@ -38,6 +38,17 @@ export const login = (userName, password) => async (dispatch, getState) => {
   }
 }
 
+const logoutSuccess = createAction('LOGOUT_SUCCESS');
+
+export const checkJwtStorage = () => async (dispatch) => {
+  let token = authentication.getToken();
+  if (token) {
+    dispatch(loginSuccess({token}));
+  } else {
+    dispatch(logoutSuccess());
+  }
+}
+
 export default createReducer({
   authenticated: false,
   error: null,

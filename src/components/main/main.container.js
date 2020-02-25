@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'; 
-import {Redirect} from 'react-router-dom';
 
 import Dashboard from './main.view';
 import {loadUserInfo} from '../../services/user/user.reducer';
@@ -24,11 +23,8 @@ export default connect(mapState, mapDispatch)(
       loadUserInfo();
     }, [loadUserInfo]);
 
-    let shouldRedirect = !!user.error;
-
     return (
       <React.Fragment>
-        {shouldRedirect && (<Redirect to="/login" />)}
         <Dashboard user={props.user}></Dashboard>
       </React.Fragment>
     );
