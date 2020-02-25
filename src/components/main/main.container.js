@@ -19,12 +19,16 @@ const mapDispatch = {
 export default connect(mapState, mapDispatch)(
   function(props) {
     let {user, loadUserInfo} = props;
+
     useEffect(() => {
       loadUserInfo();
     }, [loadUserInfo]);
+
+    let shouldRedirect = !!user.error;
+
     return (
       <React.Fragment>
-        {!!user.name || user.loading || (<Redirect to="/login" />)}
+        {shouldRedirect && (<Redirect to="/login" />)}
         <Dashboard user={props.user}></Dashboard>
       </React.Fragment>
     );

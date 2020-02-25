@@ -24,15 +24,6 @@ export async function login(userName, password) {
   }
 }
 
-export async function getUserInfo() {
-  try {
-    let resp = await utils.fetchJson('users');
-    return resp;
-  } catch (e) {
-    console.error(e);
-  }
-}
-
 function saveToken(token) {
   localStorage.setItem(JWT_TOKEN_KEY, token);
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 
-import Login from './components/login/login.container';
-import Main from './components/main/main.container'
+import Login from './login/login.container';
+import Main from './main/main.container'
 
 function App() {
   return (
