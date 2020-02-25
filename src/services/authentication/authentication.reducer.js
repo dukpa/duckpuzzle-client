@@ -7,9 +7,8 @@ export const UNKNOWN_ERROR = 'UNKNOWN_ERROR';
 
 const loginRequest = createAction('REQUEST_LOGIN');
 
-const loginSuccess = createAction('LOGIN_SUCCESS', (data) => ({
+export const loginSuccess = createAction('LOGIN_SUCCESS', (data) => ({
   payload: {
-    email: data.email,
     token: data.token
   }
 }));
@@ -38,16 +37,14 @@ export const login = (userName, password) => async (dispatch, getState) => {
   }
 }
 
-const logoutSuccess = createAction('LOGOUT_SUCCESS');
-
-export const checkJwtStorage = () => async (dispatch) => {
-  let token = authentication.getToken();
-  if (token) {
-    dispatch(loginSuccess({token}));
-  } else {
-    dispatch(logoutSuccess());
-  }
-}
+// export const checkJwtStorage = () => async (dispatch) => {
+//   let token = authentication.getToken();
+//   if (token) {
+//     dispatch(loginSuccess({token}));
+//   } else {
+//     dispatch(invalidateAuthentication());
+//   }
+// }
 
 export default createReducer({
   authenticated: false,

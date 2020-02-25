@@ -2,7 +2,6 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux'; 
 
 import Dashboard from './main.view';
-import {loadUserInfo} from '../../services/user/user.reducer';
 
 const mapState = (state) => {
   let {user} = state;
@@ -12,16 +11,11 @@ const mapState = (state) => {
 }
 
 const mapDispatch = {
-  loadUserInfo
 };
 
 export default connect(mapState, mapDispatch)(
   function(props) {
-    let {user, loadUserInfo} = props;
-
-    useEffect(() => {
-      loadUserInfo();
-    }, [loadUserInfo]);
+    let {user} = props;
 
     return (
       <React.Fragment>
