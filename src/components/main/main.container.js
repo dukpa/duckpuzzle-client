@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'; 
 import {Redirect} from 'react-router-dom';
 
@@ -18,10 +18,10 @@ const mapDispatch = {
 
 export default connect(mapState, mapDispatch)(
   function(props) {
-    let {user} = props;
+    let {user, loadUserInfo} = props;
     useEffect(() => {
-      props.loadUserInfo();
-    }, []);
+      loadUserInfo();
+    }, [loadUserInfo]);
     return (
       <React.Fragment>
         {!!user.name || user.loading || (<Redirect to="/login" />)}

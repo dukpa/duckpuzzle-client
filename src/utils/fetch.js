@@ -5,6 +5,12 @@ export const UNAUTHORIZED = 'UNAUTHORIZED';
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 export default async function(url, args) {
+  let ret = {
+    success: false,
+    data: null,
+    error: null
+  };
+  
   let token;
   if (url !== loginUrl) {
     token = getToken();
@@ -18,11 +24,6 @@ export default async function(url, args) {
   }
   
   url = `${BASE_URL}/${url}`;
-  let ret = {
-    success: false,
-    data: null,
-    error: null
-  };
 
   try {
     let resp = await fetch(url, {

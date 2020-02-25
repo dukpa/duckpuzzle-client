@@ -22,7 +22,7 @@ const mapDispatch = {
   clearError
 };
 
-export default connect(mapState, {login, clearError})(function(props) {
+export default connect(mapState, mapDispatch)(function(props) {
   let {snack, clearError, login, loggedIn} = props;
 
   let [userName, setUserName] = useState({
