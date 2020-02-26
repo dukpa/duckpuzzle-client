@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
-import authentication from './services/authentication/authentication.reducer';
-import user from './services/user/user.reducer';
+import {reducer as authentication} from './services/authentication';
+import {reducer as user} from './services/user';
 
 const reducer = combineReducers({
   authentication,

@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import {connect} from 'react-redux';
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 
-import Login from './login/login.container';
-import Main from './main/main.container'
+import Login from './login';
+import Main from './main'
 
-import {loadUserInfo} from '../services/user/user.reducer';
+import * as user from '../services/user';
 
 const mainSpinner = (<Spinner style={{width:'100%'}} size={SpinnerSize.large} />);
 
@@ -19,7 +19,7 @@ const mapState = (state) => {
 }
 
 const mapDispatch = {
-  loadUserInfo
+  loadUserInfo: user.loadUserInfo
 };
 
 const App = (props) => {

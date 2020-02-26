@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 
 import Login from './login.view';
-import {login, clearError} from '../../services/authentication/authentication.reducer';
-import getResource from './login.resources'
+import * as authentication from '../../services/authentication';
+import getResource from './login.resources';
 
 const mapState = (state) => {
   const error = state.authentication.error
@@ -17,8 +16,8 @@ const mapState = (state) => {
 };
 
 const mapDispatch = {
-  login,
-  clearError
+  login: authentication.login,
+  clearError: authentication.clearError
 };
 
 const LoginContainer = (props) => {

@@ -3,7 +3,7 @@ import {createAction} from '@reduxjs/toolkit';
 
 import {getUserInfo} from './user.api';
 import { UNAUTHORIZED } from '../../utils/fetch';
-import { invalidateAuthentication, loginSuccess } from '../authentication/authentication.reducer';
+import * as authentication from '../authentication';
 
 const requestUserInfo = createAction('REQUEST_USER_INFO');
 const receiveUserInfo = createAction('RECEIVE_USER_INFO', (data) => {
@@ -19,14 +19,14 @@ export const loadUserInfo = () => async (dispatch) => {
     let resp = await getUserInfo();
     if (resp.success) {
       dispatch(receiveUserInfo(resp.data));
-      dispatch(loginSuccess(resp.data));
+      dispatch(authentication.loginSuccess(resp.data));
     } else {
       throw resp.error;
     }
   } catch(e) {
     dispatch(errorUserInfo(e));
     if (e.name === UNAUTHORIZED) {
-      dispatch(invalidateAuthentication());
+      dispatch(authentication.invalidateAuthentication());
     }
   }
 }
