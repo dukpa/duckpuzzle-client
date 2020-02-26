@@ -9,7 +9,6 @@ import getResource from './login.resources'
 const mapState = (state) => {
   const error = state.authentication.error
   return {
-    loggedIn: state.authentication.authenticated,
     snack: {
       open: !!error,
       message: getResource(error)
@@ -22,8 +21,8 @@ const mapDispatch = {
   clearError
 };
 
-export default connect(mapState, mapDispatch)(function(props) {
-  let {snack, clearError, login, loggedIn} = props;
+const LoginContainer = (props) => {
+  let {snack, clearError, login} = props;
 
   let [userName, setUserName] = useState({
     value: '',
@@ -75,7 +74,8 @@ export default connect(mapState, mapDispatch)(function(props) {
   const formData = {
     canSubmit: canSubmit(),
     userName,
-    password
+    password,
+    rememberMe
   }
 
   const handleSubmit = (e) => {
@@ -85,7 +85,6 @@ export default connect(mapState, mapDispatch)(function(props) {
 
   return (
     <React.Fragment>
-      {loggedIn && (<Redirect to="/"></Redirect>)}
       <Login
         formData={formData}
         onUserNameChange={updateUserName}
@@ -97,4 +96,6 @@ export default connect(mapState, mapDispatch)(function(props) {
       ></Login>
     </React.Fragment>
   )
-});
+};
+
+export default connect(mapState, mapDispatch)(LoginContainer);

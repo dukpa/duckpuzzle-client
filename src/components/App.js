@@ -22,7 +22,7 @@ const mapDispatch = {
   loadUserInfo
 };
 
-function App(props) {
+const App = (props) => {
   let {authenticated, loadUserInfo, loading, loaded} = props;
 
   useEffect(() => {

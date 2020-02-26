@@ -13,14 +13,14 @@ const mapState = (state) => {
 const mapDispatch = {
 };
 
-export default connect(mapState, mapDispatch)(
-  function(props) {
-    let {user} = props;
+const DashboardContainer = (props) => {
+  let {user} = props;
 
-    return (
-      <React.Fragment>
-        <Dashboard user={user}></Dashboard>
-      </React.Fragment>
-    );
-  }
-)
+  return (
+    <React.Fragment>
+      <Dashboard user={user}></Dashboard>
+    </React.Fragment>
+  );
+};
+
+export default connect(mapState, mapDispatch)(DashboardContainer)
