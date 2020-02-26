@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {connect} from 'react-redux';
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 
@@ -7,14 +7,13 @@ import Main from './main'
 
 import * as user from '../services/user';
 
-const mainSpinner = (<Spinner style={{width:'100%'}} size={SpinnerSize.large} />);
-
 const mapState = (state) => {
   let {authentication, user} = state;
   return {
     authenticated: authentication.authenticated,
     loading: user.loading,
-    loaded: user.received
+    // failed: !user.received && !user.loading,
+    userReceived: user.received
   };
 }
 
@@ -23,32 +22,35 @@ const mapDispatch = {
 };
 
 const App = (props) => {
-  let {authenticated, loadUserInfo, loading, loaded} = props;
+  let {authenticated, loadUserInfo, loading, failed, userReceived} = props;
+
+  let [first, setFirst] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setFirst(false), 50)
+  }, []);
 
   useEffect(() => {
-    loadUserInfo();
-  }, [loadUserInfo]);
+    if (!userReceived) {
+      loadUserInfo();
+    }
+  }, [authenticated]);
 
   useEffect(() => {
     window.addEventListener('unload', () => {
-      debugger;
+      // debugger;
     });
   }, []);
-
+  
   let componentToRender;
   if (authenticated) {
     componentToRender = (<Main></Main>);
-  } else if (loading) {
-    componentToRender = mainSpinner;
-  } else if (loaded) {
+  } else if (loading || first) {
+    componentToRender = (<Spinner style={{width:'100%'}} size={SpinnerSize.large} />);
+  } else {
     componentToRender = (<Login></Login>);
   }
 
-  return (
-    <React.Fragment>
-      {componentToRender}
-    </React.Fragment>
-  );
+  return componentToRender;
 }
 
 export default connect(mapState, mapDispatch)(App);
