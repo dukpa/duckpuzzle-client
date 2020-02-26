@@ -1,7 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 
 import * as api from './authentication.api';
-import * as user from '../user';
 
 export const BAD_USER_PASS = api.BAD_USER_PASS;
 export const UNKNOWN_ERROR = 'UNKNOWN_ERROR';

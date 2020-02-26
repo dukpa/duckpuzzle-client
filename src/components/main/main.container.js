@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'; 
 
 import Dashboard from './main.view';
-import {loadUserInfo} from '../../services/user';
 
 const mapState = (state) => {
   let {user} = state;

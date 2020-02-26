@@ -12,7 +12,6 @@ const mapState = (state) => {
   return {
     authenticated: authentication.authenticated,
     loading: user.loading,
-    // failed: !user.received && !user.loading,
     userReceived: user.received
   };
 }
@@ -22,7 +21,7 @@ const mapDispatch = {
 };
 
 const App = (props) => {
-  let {authenticated, loadUserInfo, loading, failed, userReceived} = props;
+  let {authenticated, loadUserInfo, loading, userReceived} = props;
 
   let [first, setFirst] = useState(true);
   useEffect(() => {
@@ -33,7 +32,7 @@ const App = (props) => {
     if (!userReceived) {
       loadUserInfo();
     }
-  }, [authenticated]);
+  }, [authenticated, userReceived, loadUserInfo]);
 
   useEffect(() => {
     window.addEventListener('unload', () => {
