@@ -23,10 +23,10 @@ export const clearError = createAction('CLEAR_ERROR');
 
 export const invalidateAuthentication = createAction('INVALIDATE_AUTHENTICATION');
 
-export const login = (userName, password) => async (dispatch, getState) => {
+export const login = (userName, password, rememberMe) => async (dispatch) => {
   dispatch(loginRequest());
   try {
-    let loginResp = await authentication.login(userName, password);
+    let loginResp = await authentication.login(userName, password, rememberMe);
     if (loginResp.success) {
       dispatch(loginSuccess(loginResp.data));
     } else {
@@ -37,14 +37,10 @@ export const login = (userName, password) => async (dispatch, getState) => {
   }
 }
 
-// export const checkJwtStorage = () => async (dispatch) => {
-//   let token = authentication.getToken();
-//   if (token) {
-//     dispatch(loginSuccess({token}));
-//   } else {
-//     dispatch(invalidateAuthentication());
-//   }
-// }
+export const logout = () => (dispatch) => {
+  authentication.clearToken();
+  dispatch(invalidateAuthentication());
+}
 
 export default createReducer({
   authenticated: false,

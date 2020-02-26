@@ -61,6 +61,13 @@ export default connect(mapState, mapDispatch)(function(props) {
     });
   };
 
+  let [rememberMe, setRememberMe] = useState({
+    value: false
+  });
+  const onRememberMeChange = (e) => {
+    setRememberMe({value: e.target.checked});
+  };
+
   const canSubmit = () => {
     return userName.touched && !userName.error && password.touched && !password.error;
   };
@@ -72,7 +79,7 @@ export default connect(mapState, mapDispatch)(function(props) {
   }
 
   const handleSubmit = (e) => {
-    login(userName.value, password.value);
+    login(userName.value, password.value, rememberMe.value);
     e.preventDefault();
   };
 
@@ -86,6 +93,7 @@ export default connect(mapState, mapDispatch)(function(props) {
         onSubmit={handleSubmit}
         errorMessage={snack.message}
         dismissError={clearError}
+        onRememberMeChange={onRememberMeChange}
       ></Login>
     </React.Fragment>
   )

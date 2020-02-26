@@ -29,6 +29,12 @@ function App(props) {
     loadUserInfo();
   }, [loadUserInfo]);
 
+  useEffect(() => {
+    window.addEventListener('unload', () => {
+      debugger;
+    });
+  }, []);
+
   let componentToRender;
   if (authenticated) {
     componentToRender = (<Main></Main>);

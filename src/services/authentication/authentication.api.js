@@ -4,7 +4,7 @@ export const BAD_USER_PASS = 'BAD_USER_PASS';
 export const loginUrl = 'login';
 const JWT_TOKEN_KEY = 'c9155b84-b3ba-4698-8d8c-b94524ae8a9f';
 
-export async function login(userName, password) {
+export async function login(userName, password, rememberMe) {
   try {
     let resp = await utils.fetchJson(loginUrl, {
       method: 'POST',
@@ -14,7 +14,7 @@ export async function login(userName, password) {
       })
     });
 
-    if (resp.success) {
+    if (resp.success && rememberMe) {
       saveToken(resp.data.token);
     }
 
@@ -30,4 +30,8 @@ function saveToken(token) {
 
 export function getToken() {
   return localStorage.getItem(JWT_TOKEN_KEY);
+}
+
+export function clearToken() {
+  localStorage.removeItem(JWT_TOKEN_KEY);
 }

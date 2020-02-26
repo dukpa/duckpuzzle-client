@@ -57,6 +57,7 @@ export default function Login(props) {
             />
             <Checkbox
               label="Remember me"
+              onChange={props.onRememberMeChange}
             />
             <PrimaryButton 
               type="submit"
