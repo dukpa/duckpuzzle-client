@@ -12,8 +12,6 @@ export default function Dashboard(props) {
       flex: 1
     }}>
       <MainToolbar></MainToolbar>
-      <div>Hello {props.user.name}</div>
-      <button onClick={onLogoutClick}>Logout</button>
     </div>
   )
 }
