@@ -8,7 +8,7 @@ export default function MainNav(props) {
       styles={{
         root: {
           width: 208,
-          background: DefaultPalette.neutralLighter,
+          background: DefaultPalette.neutralLighterAlt,
           height: '100%',
           paddingLeft: 16
         }

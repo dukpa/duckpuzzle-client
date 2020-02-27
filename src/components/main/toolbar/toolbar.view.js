@@ -13,7 +13,7 @@ export default function MainToolbar(props) {
   return (
     <Stack
       style={{
-        backgroundColor: DefaultPalette.neutralLighter,
+        backgroundColor: DefaultPalette.neutralLighterAlt,
         height: 48,
         paddingLeft: 16,
         paddingRight: 16
