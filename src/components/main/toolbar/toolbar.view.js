@@ -15,8 +15,8 @@ export default function MainToolbar(props) {
       style={{
         backgroundColor: DefaultPalette.neutralLighter,
         height: 48,
-        paddingLeft: 50,
-        paddingRight: 50
+        paddingLeft: 16,
+        paddingRight: 16
       }}
       horizontal={true}
       verticalAlign="center"
