@@ -14,8 +14,8 @@ export async function login(userName, password, rememberMe) {
       })
     });
 
-    if (resp.success && rememberMe) {
-      saveToken(resp.data.token);
+    if (resp.success) {
+      saveToken(resp.data.token, rememberMe);
     }
 
     return resp;
@@ -24,14 +24,19 @@ export async function login(userName, password, rememberMe) {
   }
 }
 
-function saveToken(token) {
-  localStorage.setItem(JWT_TOKEN_KEY, token);
+function saveToken(token, persist) {
+  sessionStorage.setItem(JWT_TOKEN_KEY, token);
+  if (persist) {
+    localStorage.setItem(JWT_TOKEN_KEY, token);
+  }
 }
 
 export function getToken() {
-  return localStorage.getItem(JWT_TOKEN_KEY);
+  let token = sessionStorage.getItem(JWT_TOKEN_KEY) || localStorage.getItem(JWT_TOKEN_KEY);
+  return token;
 }
 
 export function clearToken() {
   localStorage.removeItem(JWT_TOKEN_KEY);
+  sessionStorage.removeItem(JWT_TOKEN_KEY);
 }

@@ -23,4 +23,4 @@ const DashboardContainer = (props) => {
   ></Dashboard>;
 };
 
-export default connect(mapState, mapDispatch)(DashboardContainer)
+export default connect(mapState, mapDispatch)(DashboardContainer);
