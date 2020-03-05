@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as auth from '../../services/authentication';
+import * as auth from 'services/authentication';
 
 function useTextField(config={}) {
   let {defaultValue, validate} = config;
