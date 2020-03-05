@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 
 import {TextField} from 'office-ui-fabric-react/lib/TextField';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
@@ -9,81 +8,18 @@ import { Stack } from 'office-ui-fabric-react/lib/Stack';
 import { DefaultPalette } from 'office-ui-fabric-react/lib/Styling';
 import {MessageBar, MessageBarType} from 'office-ui-fabric-react';
 
-import * as authentication from '../../services/authentication';
 import getResource from './login.resources';
+import {useLoginForm} from './login.hooks';
 
-const mapState = (state) => {
-  const error = state.authentication.error
-  return {
-    snack: {
-      open: !!error,
-      message: getResource(error)
-    }
-  }
-};
-
-const mapDispatch = {
-  login: authentication.login,
-  clearError: authentication.clearError
-};
-
-function Login({
-  snack,
-  clearError,
-  login
-}) {
-
-  let [userName, setUserName] = useState({
-    value: '',
-    touched: false,
-    error: ''
-  });
-  const validateUserName = (value) => {
-    if (value.length === 0) {
-      return 'Username is required';
-    }
-  };
-  const updateUserName = (e) => {
-    setUserName({
-      value: e.target.value,
-      touched: true,
-      error: validateUserName(e.target.value)
-    });
-  };
-
-  let [password, setPassword] = useState({
-    value: '',
-    touched: false,
-    error: ''
-  });
-  const validatePassword = (value) => {
-    if (value.length === 0) {
-      return 'Password is required';
-    }
-  };
-  const updatePassword = (e) => {
-    setPassword({
-      value: e.target.value,
-      touched: true,
-      error: validatePassword(e.target.value)
-    });
-  };
-
-  let [rememberMe, setRememberMe] = useState({
-    value: false
-  });
-  const onRememberMeChange = (e) => {
-    setRememberMe({value: e.target.checked});
-  };
-
-  const canSubmit = () => {
-    return userName.touched && !userName.error && password.touched && !password.error;
-  };
-
-  const handleSubmit = (e) => {
-    login(userName.value, password.value, rememberMe.value);
-    e.preventDefault();
-  };
+export default function Login(props) {
+  let {
+    userName,
+    password,
+    rememberMe,
+    canSubmit,
+    handleSubmit,
+    loginError
+  } = useLoginForm();
 
   return (
     <Stack
@@ -106,9 +42,12 @@ function Login({
         }}
         tokens={{childrenGap: 10}}
       >
-        {snack.message &&(
-          <MessageBar messageBarType={MessageBarType.error} onDismiss={clearError}>
-            {snack.message}
+        {!!loginError.message &&(
+          <MessageBar
+            messageBarType={MessageBarType.error}
+            onDismiss={loginError.clear}
+          >
+            {getResource(loginError.message)}
           </MessageBar>)}
         <form 
           spellCheck="false"
@@ -120,7 +59,7 @@ function Login({
               label="Username"
               value={userName.value}
               required
-              onChange={updateUserName}
+              onChange={userName.update}
               errorMessage={userName.error}
             />
             <TextField
@@ -129,13 +68,13 @@ function Login({
               label="Password"
               value={password.value}
               required
-              onChange={updatePassword}
+              onChange={password.update}
               errorMessage={password.error}
             />
             <Checkbox
               label="Remember me"
               value={rememberMe.value}
-              onChange={onRememberMeChange}
+              onChange={rememberMe.update}
             />
             <PrimaryButton 
               type="submit"
@@ -156,5 +95,3 @@ function Login({
     </Stack>
   );
 }
-
-export default connect(mapState, mapDispatch)(Login);
