@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 
 import Toolbar from './toolbar.view';
@@ -13,9 +13,18 @@ const mapState = (state) => {
 };
 
 function ToolbarContainer(props) {
-  let {user} = props;
+  let [userMenuHidden, setUserMenuHidden] = useState(true);
+  const showUserMenu = () => setUserMenuHidden(!userMenuHidden);
+  const hideUserMenu = () => setUserMenuHidden(true);
+
   return (
-    <Toolbar user={user}></Toolbar>
+    <Toolbar
+      {...props}
+      userMenuHidden={userMenuHidden}
+      onUserButtonClick={showUserMenu}
+      onUserMenuDismiss={hideUserMenu}
+      onUserMenuItemClick={hideUserMenu}
+    />
   );
 }
 
