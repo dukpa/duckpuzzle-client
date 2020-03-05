@@ -1,1 +1,1 @@
-export {default} from './nav.view';
+export {default} from './nav'
