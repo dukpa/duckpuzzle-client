@@ -9,7 +9,14 @@ import {DefaultPalette} from 'office-ui-fabric-react/';
 const buttonStyle = {height: 48, width: 48};
 
 export default function MainToolbar(props) {
-  let {user, userMenuHidden, onUserButtonClick, onUserMenuDismiss, onUserMenuItemClick} = props;
+  let {
+    user,
+    userMenuHidden,
+    onUserButtonClick,
+    onUserMenuDismiss,
+    onUserMenuItemClick,
+    onLogoutClick
+  } = props;
 
   return (
     <Stack
@@ -62,7 +69,7 @@ export default function MainToolbar(props) {
           {
             key: 'logout',
             text: 'Logout',
-            onClick: () => console.log('Logout')
+            onClick: onLogoutClick
           }
         ]}
         onItemClick={onUserMenuDismiss}

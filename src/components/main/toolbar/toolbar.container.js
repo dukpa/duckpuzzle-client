@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux';
 
 import Toolbar from './toolbar.view';
+import {logout} from '../../../services/authentication';
 
 const mapState = (state) => {
   let {user} = state;
@@ -10,6 +11,10 @@ const mapState = (state) => {
       name: user.name
     }
   }
+};
+
+const mapDispatch = {
+  onLogoutClick: logout
 };
 
 function ToolbarContainer(props) {
@@ -28,4 +33,4 @@ function ToolbarContainer(props) {
   );
 }
 
-export default connect(mapState)(ToolbarContainer);
+export default connect(mapState, mapDispatch)(ToolbarContainer);
