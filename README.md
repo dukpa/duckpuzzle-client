@@ -15,6 +15,6 @@ You can create a component with
 This will create a directory with the following structure:  
 componentname  
 |   index.js  
-|   componentname.js
+|   componentname.js  
 |   componentname.hook.js  
 With all the bootstraps.
