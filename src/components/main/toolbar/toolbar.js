@@ -25,7 +25,7 @@ export default function MainToolbar(props) {
       verticalAlign="center"
     >
       <Image
-        src="duck-logo-text-32.svg"
+        src="/duck-logo-text-32.svg"
         imageFit={ImageFit.none}
         height={40}
       ></Image>
