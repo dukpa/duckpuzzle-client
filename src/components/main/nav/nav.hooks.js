@@ -8,8 +8,18 @@ export default function useNav() {
     history.push(link.key);
   }
 
+  const keys = ['/home', '/requests', '/requests/all', '/requests/draft', '/requests/progress', '/requests/fulfilled', '/requests/new', '/reports'];
+  let selectedKey = keys.reduce((selected, value) => {
+    if (location.pathname.includes(value)) {
+      return value;
+    } else {
+      return selected;
+    }
+  });
+
   return {
     requestsExpanded,
-    navigate
+    navigate,
+    selectedKey
   }
 }

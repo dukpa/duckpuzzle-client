@@ -6,8 +6,10 @@ import useNav from './nav.hooks';
 export default function MainNav() {
   const {
     requestsExpanded,
-    navigate
+    navigate,
+    selectedKey
   } = useNav();
+  console.log(selectedKey);
   return (
     <Nav
       styles={{
@@ -19,6 +21,7 @@ export default function MainNav() {
         }
       }}
       onLinkClick={navigate}
+      selectedKey={selectedKey}
       groups={[
         {
           links: [
