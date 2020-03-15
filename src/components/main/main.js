@@ -4,10 +4,9 @@ import {Stack} from 'office-ui-fabric-react/lib/Stack';
 
 import MainToolbar from './toolbar';
 import MainNav from './nav';
+import MainContainer from './maincontainer';
 
 export default function Dashboard(props) {
-  // let {onLogoutClick} = props;
-
   return (
     <Stack 
       style={{
@@ -22,6 +21,7 @@ export default function Dashboard(props) {
         grow={1}
       >
         <MainNav></MainNav>
+        <MainContainer></MainContainer>
       </Stack>
     </Stack>
   )
