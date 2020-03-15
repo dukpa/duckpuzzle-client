@@ -12,12 +12,12 @@ export default function Home({
   title,
   children
 }) {
-    return (
-      <Stack
-        horizontalAlign="stretch"
-      >
-        <H1 text={title}></H1>
-        {children}
-      </Stack>
-    )
-  }
+  return (
+    <Stack
+      horizontalAlign="stretch"
+    >
+      <H1 text={title}></H1>
+      {children}
+    </Stack>
+  )
+}
