@@ -10,7 +10,12 @@ import Reports from 'components/reports';
 export default function MainContainer(props) {
     // const {} = useMainContainer();
     return (
-      <Switch>
+      <div style={{
+        paddingLeft: 40,
+        paddingRight: 40,
+        flex: 1
+      }}>
+        <Switch>
         <Route path="/home">
           <Home></Home>
         </Route>
@@ -24,5 +29,6 @@ export default function MainContainer(props) {
           <Reports></Reports>
         </Route>
       </Switch>
+      </div>
     )
   }
