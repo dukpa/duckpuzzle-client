@@ -78,6 +78,29 @@ export default function ContactInfo(props) {
         tokens={{
           childrenGap: 20
         }}
+      >
+        <Stack.Item
+          grow={1}
+        >
+          <TextField
+            label="Phone"
+            style={fieldStyle}
+          />
+        </Stack.Item>
+        <Stack.Item
+          grow={1}
+        >
+          <TextField
+            label="Email"
+            style={fieldStyle}
+          />
+        </Stack.Item>
+      </Stack>
+      <Stack
+        horizontal
+        tokens={{
+          childrenGap: 20
+        }}
         horizontalAlign="end"
       >
         <DefaultButton
