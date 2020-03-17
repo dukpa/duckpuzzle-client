@@ -1,7 +1,7 @@
 import React from 'react';
-import { Stack, TextField, ComboBox, DefaultButton, PrimaryButton } from 'office-ui-fabric-react';
+import { Stack, TextField, ComboBox, DefaultButton, PrimaryButton, Checkbox } from 'office-ui-fabric-react';
 
-import useContactInfo from './contactinfo.hook';
+import useInvoicingInfo from './invoicinginfo.hook';
 
 const fieldStyle = {
   flex: 1
@@ -11,14 +11,15 @@ const buttonStyle= {
   width: 100
 };
 
-export default function ContactInfo(props) {
-  const {} = useContactInfo();
+export default function InvoicingInfo(props) {
+  const {} = useInvoicingInfo();
   return (
     <Stack
-        tokens={{
-          childrenGap: 20
-        }}
-      >
+      tokens={{
+        childrenGap: 20
+      }}
+    >
+      <Checkbox label="Same as Reporting"></Checkbox>
       <Stack
         horizontal
         tokens={{
