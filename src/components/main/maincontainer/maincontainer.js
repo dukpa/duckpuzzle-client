@@ -13,6 +13,7 @@ export default function MainContainer(props) {
       <div style={{
         paddingLeft: 40,
         paddingRight: 40,
+        paddingBottom: 40,
         flex: 1
       }}>
         <Switch>

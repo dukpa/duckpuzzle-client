@@ -15,10 +15,10 @@ export default function ContactInfo(props) {
   const {} = useContactInfo();
   return (
     <Stack
-        tokens={{
-          childrenGap: 20
-        }}
-      >
+      tokens={{
+        childrenGap: 20
+      }}
+    >
       <Stack
         horizontal
         tokens={{
