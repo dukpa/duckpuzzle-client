@@ -5,23 +5,19 @@ export const loginUrl = 'login';
 const JWT_TOKEN_KEY = 'c9155b84-b3ba-4698-8d8c-b94524ae8a9f';
 
 export async function login(userName, password, rememberMe) {
-  try {
-    let resp = await utils.fetchJson(loginUrl, {
-      method: 'POST',
-      body: JSON.stringify({
-        email: userName,
-        password
-      })
-    });
+  let resp = await utils.fetchJson(loginUrl, {
+    method: 'POST',
+    body: JSON.stringify({
+      email: userName,
+      password
+    })
+  });
 
-    if (resp.success) {
-      saveToken(resp.data.token, rememberMe);
-    }
-
-    return resp;
-  } catch(e) {
-    console.error(e);
+  if (resp.success) {
+    saveToken(resp.data.token, rememberMe);
   }
+
+  return resp;
 }
 
 function saveToken(token, persist) {

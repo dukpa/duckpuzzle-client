@@ -25,15 +25,11 @@ export const invalidateAuthentication = createAction('INVALIDATE_AUTHENTICATION'
 
 export const login = (userName, password, rememberMe) => async (dispatch) => {
   dispatch(loginRequest());
-  try {
-    let loginResp = await api.login(userName, password, rememberMe);
-    if (loginResp.success) {
-      dispatch(loginSuccess(loginResp.data));
-    } else {
-      throw loginResp.error;
-    }
-  } catch(e) {
-    dispatch(loginError(e));
+  let loginResp = await api.login(userName, password, rememberMe);
+  if (loginResp.success) {
+    dispatch(loginSuccess(loginResp.data));
+  } else {
+    dispatch(loginError(loginResp.error));
   }
 }
 

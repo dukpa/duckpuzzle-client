@@ -36,10 +36,10 @@ export default async function(url, args) {
     let json = await resp.json();
     if (resp.ok) {
       ret.success = true;
-      ret.data = json;
+      ret.data = json.data;
     } else {
       ret.success = false;
-      ret.error = json;
+      ret.error = json.error;
     }
   } catch(e) {
     ret.success = false;
