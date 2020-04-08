@@ -7,16 +7,18 @@ export default createReducer({
   loading: false,
   received: false,
   error: null,
-  name: null,
-  email: null
+  data: {
+    name: null,
+    email: null
+  }
 }, {
   [requestUserInfo]: function(state, action) {
     state.loading = true;
   },
   [receiveUserInfo]: function(state, action) {
     let {name, email} = action.payload.items[0];
-    state.name = name;
-    state.email = email;
+    state.data.name = name;
+    state.data.email = email;
     state.loading = false;
     state.received = true;
   },

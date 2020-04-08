@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import * as auth from 'services/authentication';
 
 export function useUserMenu() {
-  let user = useSelector(state => state.user);
+  let user = useSelector(state => state.user.data);
   let dispatch = useDispatch();
 
   let [hidden, setHidden] = useState(true);
