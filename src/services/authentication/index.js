@@ -1,3 +1,3 @@
-export {default as reducer} from './authentication.reducer';
+import {default as reducer} from './authentication.reducer';
 export * from './authentication.actions';
-// export {actions};
+export default reducer;
