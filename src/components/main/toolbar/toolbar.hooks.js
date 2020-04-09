@@ -1,23 +1,23 @@
 import {useState} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
 
-import * as auth from 'services/authentication';
+import {useCurrentUser} from 'services/user';
+import {useAuthentication} from 'services/authentication';
 
 export function useUserMenu() {
-  let user = useSelector(state => state.user.data);
-  let dispatch = useDispatch();
+  let user = useCurrentUser();
+  let auth = useAuthentication();
 
   let [hidden, setHidden] = useState(true);
   const toggleShow = () => setHidden(!hidden);
   const hide = () => setHidden(true);
 
-  const logout = () => dispatch(auth.logout());
+  const logout = () => auth.logout();
 
   return {
     hidden, setHidden,
     hide,
     toggleShow,
-    user,
+    user: user.data,
     logout
   };
 }

@@ -1,7 +1,6 @@
 import {useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
-import * as auth from 'services/authentication';
+import {useAuthentication} from 'services/authentication';
 
 function useTextField(config={}) {
   let {defaultValue, validate} = config;
@@ -54,9 +53,9 @@ function useRememberMe() {
 }
 
 function useLoginError() {
-  let dispatch = useDispatch();
-  let message = useSelector(state => state.authentication.error);
-  const clear = () => dispatch(auth.clearError());
+  let auth = useAuthentication();
+  let message = auth.error;
+  const clear = () => auth.clearError();
   return {
     message,
     clear
@@ -64,7 +63,7 @@ function useLoginError() {
 }
 
 export function useLoginForm() {
-  let dispatch = useDispatch();
+  let auth = useAuthentication();
   let userName = useUserName();
   let password = usePassword();
   let rememberMe = useRememberMe();
@@ -76,9 +75,7 @@ export function useLoginForm() {
   };
 
   const handleSubmit = (e) => {
-    dispatch(
-      auth.login(userName.value, password.value, rememberMe.value)
-    );
+    auth.login(userName.value, password.value, rememberMe.value);
     e.preventDefault();
   };
 

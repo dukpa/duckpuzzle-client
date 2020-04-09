@@ -1,3 +1,3 @@
-import {default as reducer} from './user.reducer';
+export {default as reducer} from './user.reducer';
 export * from './user.actions';
-export default reducer;
+export {default as useCurrentUser} from './user.hook';
