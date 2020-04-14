@@ -4,11 +4,11 @@ export const UNAUTHORIZED = 'UNAUTHORIZED';
 
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
-const DELAY = process.env.NODE_ENV === 'development' ? 1000 : 0;
 function addDevWait() {
   return new Promise(resolve => {
-    if (DELAY > 0) {
-      setTimeout(resolve, DELAY);
+    if (process.env.NODE_ENV === 'development') {
+      let delay = parseInt(Math.random()*700 + 300);
+      setTimeout(resolve, delay);
     } else {
       resolve();
     }
