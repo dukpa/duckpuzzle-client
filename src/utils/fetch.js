@@ -4,6 +4,17 @@ export const UNAUTHORIZED = 'UNAUTHORIZED';
 
 const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
+const DELAY = process.env.NODE_ENV === 'development' ? 1000 : 0;
+function addDevWait() {
+  return new Promise(resolve => {
+    if (DELAY > 0) {
+      setTimeout(resolve, DELAY);
+    } else {
+      resolve();
+    }
+  });
+}
+
 export default async function(url, args) {
   let ret = {
     success: false,
@@ -26,6 +37,7 @@ export default async function(url, args) {
   url = `${BASE_URL}/${url}`;
 
   try {
+    await addDevWait();
     let resp = await fetch(url, {
       ...args,
       headers: {

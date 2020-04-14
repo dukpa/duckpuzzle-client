@@ -1,20 +1,25 @@
 import React from 'react';
-import { Stack, Text, DefaultButton, PrimaryButton } from 'office-ui-fabric-react';
+import { 
+  Stack, Text,
+  DefaultButton, PrimaryButton,
+  Spinner, SpinnerSize 
+} from 'office-ui-fabric-react';
 import { Page, Section } from 'components/controls/layout';
 import ContactInfo from './contactinfo';
 import InvoicingInfo from './invoicinginfo';
 import Tests from './tests';
 
-// import useNewRequest from './newrequest.hook';
+import useNewRequest from './newrequest.hook';
 
 const buttonStyle= {
   width: 100
 };
 
-export default function NewRequest(props) {
-  // const {} = useNewRequest();
+function renderView({
+  request
+}) {
   return (
-    <Page title="New Request">
+    <Page title={`New Request # ${request.requestNo}`}>
       <Stack tokens={{childrenGap: 40}}>
         <Section title="Contact">
           <ContactInfo />
@@ -51,5 +56,30 @@ export default function NewRequest(props) {
         </Stack>
       </Stack>
     </Page>
+  )
+}
+
+function renderSpinner() {
+  return (
+    <Page>
+      <Spinner
+        style={{width:'100%'}}
+        size={SpinnerSize.large}
+        label="Creating new request"
+      />
+    </Page>
+  )
+}
+
+export default function NewRequest(props) {
+  const {
+    request,
+    loading
+  } = useNewRequest();
+
+  return (
+    loading ?
+      renderSpinner() :
+      renderView({request})
   )
 }
