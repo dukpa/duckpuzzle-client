@@ -1,7 +1,7 @@
 import React from 'react';
 import { Stack, TextField, ComboBox, DefaultButton, PrimaryButton, Checkbox } from 'office-ui-fabric-react';
 
-import useInvoicingInfo from './invoicinginfo.hook';
+// import useInvoicingInfo from './invoicinginfo.hook';
 
 const fieldStyle = {
   flex: 1
@@ -12,7 +12,7 @@ const buttonStyle= {
 };
 
 export default function InvoicingInfo(props) {
-  const {} = useInvoicingInfo();
+  // const {} = useInvoicingInfo();
   return (
     <Stack
       tokens={{

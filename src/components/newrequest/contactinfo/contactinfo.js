@@ -1,7 +1,7 @@
 import React from 'react';
 import { Stack, TextField, ComboBox, DefaultButton, PrimaryButton } from 'office-ui-fabric-react';
 
-import useContactInfo from './contactinfo.hook';
+// import useContactInfo from './contactinfo.hook';
 
 const fieldStyle = {
   flex: 1
@@ -12,7 +12,7 @@ const buttonStyle= {
 };
 
 export default function ContactInfo(props) {
-  const {} = useContactInfo();
+  // const {} = useContactInfo();
   return (
     <Stack
       tokens={{

@@ -17,10 +17,10 @@ export default function App () {
   }, []);
 
   useEffect(() => {
-    if (!user.received) {
+    if (!auth.authenticated && !user.loading && !user.received) {
       user.load()
     }
-  }, [auth.authenticated, user.received]);
+  });
   
   let componentToRender;
   if (auth.authenticated) {
