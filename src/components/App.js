@@ -17,7 +17,7 @@ export default function App () {
   }, []);
 
   useEffect(() => {
-    if (!auth.authenticated && !user.loading && !user.received) {
+    if (!auth.authenticated && !user.loading && !user.received && first) {
       user.load()
     }
   });
