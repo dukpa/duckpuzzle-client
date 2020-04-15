@@ -1,7 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 import {getUserInfo} from './user.api';
 
-import { UNAUTHORIZED } from '../../utils/fetch';
 import * as authentication from '../authentication';
 
 export const requestUserInfo = createAction('REQUEST_USER_INFO');
