@@ -12,7 +12,7 @@ export default function useNewRequest() {
   });
 
   return {
-    loading: requests.creating,
+    loading: requests.creating && !requests.current,
     request: requests.current || {}
   };
 }
