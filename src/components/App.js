@@ -17,11 +17,12 @@ export default function App () {
   }, []);
 
   useEffect(() => {
-    if (!auth.authenticated && !user.loading && !user.received && first) {
+    debugger;
+    if (!auth.authenticated && !user.loading && !user.received && !user.error) {
       user.load()
     }
   });
-  
+  debugger;
   let componentToRender;
   if (auth.authenticated) {
     componentToRender = (<Main></Main>);

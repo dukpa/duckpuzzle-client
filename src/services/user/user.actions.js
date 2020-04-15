@@ -15,14 +15,12 @@ export const errorUserInfo = createAction('ERROR_USER_INFO', (e) => {
 export const loadUserInfo = () => async (dispatch, getState) => {
   dispatch(requestUserInfo());
   let resp = await getUserInfo();
-  if (resp.success) {
+  if (resp.success && resp.data) {
     dispatch(receiveUserInfo(resp.data));
     if (!getState().authentication.authenticated)
       dispatch(authentication.loginSuccess(resp.data));
   } else {
     dispatch(errorUserInfo(resp.error));
-    if (resp.error.name === UNAUTHORIZED) {
-      dispatch(authentication.invalidateAuthentication());
-    }
+    dispatch(authentication.invalidateAuthentication());
   }
 }
